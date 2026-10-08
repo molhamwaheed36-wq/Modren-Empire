@@ -45,7 +45,7 @@ jobs:
           GODOT=$(cat "$RUNNER_TEMP/godot_path.txt")
           mkdir -p ModrenEmpire_Godot/build
           "$GODOT" --headless --path ModrenEmpire_Godot --import
-          "$GODOT" --headless --path ModrenEmpire_Godot --export-pack "Linux Pack" ModrenEmpire_Godot/build/index.android.pck
+          "$GODOT" --headless --path ModrenEmpire_Godot --export-pack "Linux Pack" build/index.android.pck
           test -s ModrenEmpire_Godot/build/index.android.pck
 
       - name: Build and sign APK
