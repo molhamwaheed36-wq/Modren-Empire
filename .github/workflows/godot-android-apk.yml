@@ -61,11 +61,11 @@ jobs:
           keytool -genkeypair -v -keystore "$RUNNER_TEMP/modren-debug.keystore" -storepass android -keypass android -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
           ZIPALIGN=$(find "$ANDROID_HOME/build-tools" -name zipalign | sort | tail -1)
           APKSIGNER=$(find "$ANDROID_HOME/build-tools" -name apksigner | sort | tail -1)
-          "$ZIPALIGN" -f 4 "$RUNNER_TEMP/unsigned.apk" ModrenEmpire_Godot/build/ModrenEmpire-debug-unaligned.apk
-          "$APKSIGNER" sign --ks "$RUNNER_TEMP/modren-debug.keystore" --ks-pass pass:android --key-pass pass:android --out ModrenEmpire_Godot/build/ModrenEmpire-debug.apk ModrenEmpire_Godot/build/ModrenEmpire-debug-unaligned.apk
+          "$ZIPALIGN" -f 4 "$RUNNER_TEMP/unsigned.apk" "$GITHUB_WORKSPACE/ModrenEmpire_Godot/build/ModrenEmpire-debug-unaligned.apk"
+          "$APKSIGNER" sign --ks "$RUNNER_TEMP/modren-debug.keystore" --ks-pass pass:android --key-pass pass:android --out "$GITHUB_WORKSPACE/ModrenEmpire_Godot/build/ModrenEmpire-debug.apk" "$GITHUB_WORKSPACE/ModrenEmpire_Godot/build/ModrenEmpire-debug-unaligned.apk"
           "$APKSIGNER" verify --verbose ModrenEmpire_Godot/build/ModrenEmpire-debug.apk
-          file ModrenEmpire_Godot/build/ModrenEmpire-debug.apk
-          sha256sum ModrenEmpire_Godot/build/ModrenEmpire-debug.apk
+          file "$GITHUB_WORKSPACE/ModrenEmpire_Godot/build/ModrenEmpire-debug.apk"
+          sha256sum "$GITHUB_WORKSPACE/ModrenEmpire_Godot/build/ModrenEmpire-debug.apk"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
