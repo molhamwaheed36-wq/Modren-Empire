@@ -1,0 +1,5 @@
+# Systems Included
+
+The current build includes a connected company-management economy: company cash, revenue, expenses, debt, XP and levels; a phone designer covering CPU, GPU, NPU, RAM, storage, display, camera, battery, charging, connectivity, Bluetooth/sensors, cooling, materials, build quality, operating system and software features; prerequisite R&D; product generations and patents; employees with roles, skills, salaries, morale, experience and training; multiple factories with capacity, efficiency, quality, upgrades and production; suppliers, reliability, contracts and procurement risk; markets, demand, preferences, pricing modifiers, expansion and share; competitor strategy, cash, price and quality; marketing, reputation, investments and dynamic events; a virtual bank ledger and currency registry; schema-3 local save/export/import; Game Director tools; responsive UI; and Android hotspot TCP state snapshots.
+
+Real banking, real currency, blockchain, cloud accounts and external payments are intentionally not implemented.
