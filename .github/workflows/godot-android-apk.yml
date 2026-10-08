@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   export-android:
-    name: Export Modren Empire APK
+    name: Build Modren Empire APK
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,50 +22,48 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Prepare Android SDK
+      - name: Prepare Android build tools
         run: |
           SDKMANAGER=$(find "$ANDROID_HOME/cmdline-tools" -name sdkmanager -type f | head -1)
           yes | "$SDKMANAGER" --licenses >/dev/null || true
-          yes | "$SDKMANAGER" "platform-tools" "platforms;android-34" "build-tools;34.0.0" "ndk;27.2.12479018"
+          yes | "$SDKMANAGER" "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 
-      - name: Install Godot and Android export templates
+      - name: Download Godot and templates
         run: |
-          mkdir -p "$RUNNER_TEMP/godot" "$HOME/.local/share/godot/export_templates/4.3.stable"
+          mkdir -p "$RUNNER_TEMP/godot/bin" "$HOME/.local/share/godot/export_templates/4.3.stable"
           curl -fsSL --retry 3 -o "$RUNNER_TEMP/godot/godot.zip" https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
           unzip -q "$RUNNER_TEMP/godot/godot.zip" -d "$RUNNER_TEMP/godot/bin"
           GODOT=$(find "$RUNNER_TEMP/godot/bin" -type f -name 'Godot_v4.3-stable_linux.x86_64' | head -1)
           chmod +x "$GODOT"
+          echo "$GODOT" > "$RUNNER_TEMP/godot_path.txt"
           curl -fsSL --retry 3 -o "$RUNNER_TEMP/godot/templates.tpz" https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
-          unzip -p "$RUNNER_TEMP/godot/templates.tpz" templates/android_debug.apk > "$HOME/.local/share/godot/export_templates/4.3.stable/android_debug.apk"
-          unzip -p "$RUNNER_TEMP/godot/templates.tpz" templates/android_release.apk > "$HOME/.local/share/godot/export_templates/4.3.stable/android_release.apk"
-          unzip -p "$RUNNER_TEMP/godot/templates.tpz" templates/android_source.zip > "$HOME/.local/share/godot/export_templates/4.3.stable/android_source.zip"
-          echo "$GODOT" > "$RUNNER_TEMP/godot/godot_path.txt"
+          unzip -p "$RUNNER_TEMP/godot/templates.tpz" templates/android_debug.apk > "$RUNNER_TEMP/android_debug.apk"
+          unzip -p "$RUNNER_TEMP/godot/templates.tpz" templates/linux_debug.x86_64 > "$HOME/.local/share/godot/export_templates/4.3.stable/linux_debug.x86_64"
 
-      - name: Configure Godot Android SDK paths
+      - name: Export game pack
         run: |
-          mkdir -p "$HOME/.config/godot"
-          cat > "$HOME/.config/godot/editor_settings-4.tres" <<SETTINGS
-          [gd_resource type="EditorSettings" format=3]
-          [resource]
-          export/android/android_sdk_path = "$ANDROID_HOME"
-          export/android/android_ndk_path = "$ANDROID_HOME/ndk/27.2.12479018"
-          export/android/java_sdk_path = "$JAVA_HOME"
-          SETTINGS
-
-      - name: Import project
-        run: |
-          GODOT=$(cat "$RUNNER_TEMP/godot/godot_path.txt")
-          "$GODOT" --headless --path ModrenEmpire_Godot --import
-
-      - name: Export debug APK
-        run: |
-          GODOT=$(cat "$RUNNER_TEMP/godot/godot_path.txt")
+          GODOT=$(cat "$RUNNER_TEMP/godot_path.txt")
           mkdir -p ModrenEmpire_Godot/build
-          "$GODOT" --headless --path ModrenEmpire_Godot --install-android-build-template --export-debug Android ModrenEmpire_Godot/build/ModrenEmpire-debug.apk
+          "$GODOT" --headless --path ModrenEmpire_Godot --import
+          "$GODOT" --headless --path ModrenEmpire_Godot --export-pack "Linux Pack" ModrenEmpire_Godot/build/index.android.pck
+          test -s ModrenEmpire_Godot/build/index.android.pck
 
-      - name: Verify APK
+      - name: Build and sign APK
         run: |
-          test -s ModrenEmpire_Godot/build/ModrenEmpire-debug.apk
+          set -e
+          rm -rf "$RUNNER_TEMP/apk"
+          mkdir -p "$RUNNER_TEMP/apk"
+          cd "$RUNNER_TEMP/apk"
+          unzip -q "$RUNNER_TEMP/android_debug.apk"
+          mkdir -p assets
+          cp "$GITHUB_WORKSPACE/ModrenEmpire_Godot/build/index.android.pck" assets/index.android.pck
+          zip -q -0 -r "$RUNNER_TEMP/unsigned.apk" .
+          keytool -genkeypair -v -keystore "$RUNNER_TEMP/modren-debug.keystore" -storepass android -keypass android -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+          ZIPALIGN=$(find "$ANDROID_HOME/build-tools" -name zipalign | sort | tail -1)
+          APKSIGNER=$(find "$ANDROID_HOME/build-tools" -name apksigner | sort | tail -1)
+          "$ZIPALIGN" -f 4 "$RUNNER_TEMP/unsigned.apk" ModrenEmpire_Godot/build/ModrenEmpire-debug-unaligned.apk
+          "$APKSIGNER" sign --ks "$RUNNER_TEMP/modren-debug.keystore" --ks-pass pass:android --key-pass pass:android --out ModrenEmpire_Godot/build/ModrenEmpire-debug.apk ModrenEmpire_Godot/build/ModrenEmpire-debug-unaligned.apk
+          "$APKSIGNER" verify --verbose ModrenEmpire_Godot/build/ModrenEmpire-debug.apk
           file ModrenEmpire_Godot/build/ModrenEmpire-debug.apk
           sha256sum ModrenEmpire_Godot/build/ModrenEmpire-debug.apk
 
