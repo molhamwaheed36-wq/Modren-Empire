@@ -38,6 +38,7 @@ jobs:
           curl -fsSL --retry 3 -o "$RUNNER_TEMP/godot/templates.tpz" https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
           unzip -p "$RUNNER_TEMP/godot/templates.tpz" templates/android_debug.apk > "$HOME/.local/share/godot/export_templates/4.3.stable/android_debug.apk"
           unzip -p "$RUNNER_TEMP/godot/templates.tpz" templates/android_release.apk > "$HOME/.local/share/godot/export_templates/4.3.stable/android_release.apk"
+          unzip -p "$RUNNER_TEMP/godot/templates.tpz" templates/android_source.zip > "$HOME/.local/share/godot/export_templates/4.3.stable/android_source.zip"
           echo "$GODOT" > "$RUNNER_TEMP/godot/godot_path.txt"
 
       - name: Configure Godot Android SDK paths
@@ -55,6 +56,7 @@ jobs:
         run: |
           GODOT=$(cat "$RUNNER_TEMP/godot/godot_path.txt")
           "$GODOT" --headless --path ModrenEmpire_Godot --import
+          "$GODOT" --headless --path ModrenEmpire_Godot --install-android-build-template
 
       - name: Export debug APK
         run: |
