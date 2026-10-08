@@ -1,0 +1,13 @@
+{
+  "name": "USA",
+  "demand": 1.2,
+  "purchasing_power": 1.5,
+  "competition": 0.92,
+  "tax_rate": 0.124,
+  "growth_rate": 0.022,
+  "segments": {
+    "budget": 0.35,
+    "mainstream": 0.45,
+    "premium": 0.2
+  }
+}

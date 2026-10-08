@@ -1,0 +1,25 @@
+{
+  "id": "ME_EDGE",
+  "name": "Modren Edge",
+  "generation": 6,
+  "base_price": 879,
+  "target_segments": [
+    "mainstream",
+    "premium"
+  ],
+  "components": {
+    "cpu": 6,
+    "gpu": 6,
+    "npu": 5,
+    "display": 6,
+    "camera": 6,
+    "battery": 6,
+    "ram": 6,
+    "storage": 6,
+    "connectivity": 6,
+    "os": 6,
+    "materials": 6
+  },
+  "development_cost": 60000,
+  "manufacturing_multiplier": 0.97
+}

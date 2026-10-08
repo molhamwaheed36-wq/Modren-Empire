@@ -1,0 +1,24 @@
+{
+  "id": "ME_LITE",
+  "name": "Modren Lite",
+  "generation": 2,
+  "base_price": 559,
+  "target_segments": [
+    "mainstream"
+  ],
+  "components": {
+    "cpu": 2,
+    "gpu": 2,
+    "npu": 1,
+    "display": 2,
+    "camera": 2,
+    "battery": 2,
+    "ram": 2,
+    "storage": 2,
+    "connectivity": 2,
+    "os": 2,
+    "materials": 2
+  },
+  "development_cost": 20000,
+  "manufacturing_multiplier": 1.0899999999999999
+}

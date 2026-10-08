@@ -1,0 +1,12 @@
+{
+  "id": "EVENT_001",
+  "title": "Dynamic Event 2",
+  "category": "technology",
+  "probability": 0.028,
+  "effects": {
+    "cash": 1250,
+    "reputation": 2,
+    "demand_multiplier": 0.95,
+    "duration_months": 2
+  }
+}

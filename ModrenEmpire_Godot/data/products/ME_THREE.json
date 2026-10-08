@@ -1,0 +1,25 @@
+{
+  "id": "ME_THREE",
+  "name": "Modren Three",
+  "generation": 5,
+  "base_price": 799,
+  "target_segments": [
+    "mainstream",
+    "premium"
+  ],
+  "components": {
+    "cpu": 5,
+    "gpu": 5,
+    "npu": 4,
+    "display": 5,
+    "camera": 5,
+    "battery": 5,
+    "ram": 5,
+    "storage": 5,
+    "connectivity": 5,
+    "os": 5,
+    "materials": 5
+  },
+  "development_cost": 50000,
+  "manufacturing_multiplier": 0.9999999999999999
+}

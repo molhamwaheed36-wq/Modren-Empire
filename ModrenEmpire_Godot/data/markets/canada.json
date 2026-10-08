@@ -1,0 +1,13 @@
+{
+  "name": "Canada",
+  "demand": 0.86,
+  "purchasing_power": 1.25,
+  "competition": 0.7,
+  "tax_rate": 0.106,
+  "growth_rate": 0.019,
+  "segments": {
+    "budget": 0.35,
+    "mainstream": 0.45,
+    "premium": 0.2
+  }
+}

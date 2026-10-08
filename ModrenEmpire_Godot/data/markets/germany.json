@@ -1,0 +1,13 @@
+{
+  "name": "Germany",
+  "demand": 0.9,
+  "purchasing_power": 1.35,
+  "competition": 0.75,
+  "tax_rate": 0.11,
+  "growth_rate": 0.019,
+  "segments": {
+    "budget": 0.35,
+    "mainstream": 0.45,
+    "premium": 0.2
+  }
+}

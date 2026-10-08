@@ -1,0 +1,12 @@
+{
+  "id": "EVENT_024",
+  "title": "Dynamic Event 25",
+  "category": "supply",
+  "probability": 0.044,
+  "effects": {
+    "cash": -7000,
+    "reputation": -5,
+    "demand_multiplier": 1.1,
+    "duration_months": 1
+  }
+}

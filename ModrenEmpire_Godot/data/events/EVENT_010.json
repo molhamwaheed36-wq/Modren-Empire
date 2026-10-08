@@ -1,0 +1,12 @@
+{
+  "id": "EVENT_010",
+  "title": "Dynamic Event 11",
+  "category": "competitor",
+  "probability": 0.044,
+  "effects": {
+    "cash": 3500,
+    "reputation": 1,
+    "demand_multiplier": 0.9,
+    "duration_months": 3
+  }
+}

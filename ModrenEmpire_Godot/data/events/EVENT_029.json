@@ -1,0 +1,12 @@
+{
+  "id": "EVENT_029",
+  "title": "Dynamic Event 30",
+  "category": "product",
+  "probability": 0.028,
+  "effects": {
+    "cash": 8250,
+    "reputation": 5,
+    "demand_multiplier": 1.1,
+    "duration_months": 2
+  }
+}

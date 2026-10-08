@@ -1,0 +1,13 @@
+{
+  "name": "France",
+  "demand": 0.82,
+  "purchasing_power": 1.25,
+  "competition": 0.72,
+  "tax_rate": 0.108,
+  "growth_rate": 0.018,
+  "segments": {
+    "budget": 0.35,
+    "mainstream": 0.45,
+    "premium": 0.2
+  }
+}

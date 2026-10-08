@@ -1,0 +1,12 @@
+{
+  "id": "EVENT_026",
+  "title": "Dynamic Event 27",
+  "category": "economy",
+  "probability": 0.06,
+  "effects": {
+    "cash": 7500,
+    "reputation": 2,
+    "demand_multiplier": 0.95,
+    "duration_months": 3
+  }
+}

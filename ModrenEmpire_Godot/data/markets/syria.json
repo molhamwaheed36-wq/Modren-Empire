@@ -1,0 +1,13 @@
+{
+  "name": "Syria",
+  "demand": 1.0,
+  "purchasing_power": 0.65,
+  "competition": 0.45,
+  "tax_rate": 0.086,
+  "growth_rate": 0.02,
+  "segments": {
+    "budget": 0.35,
+    "mainstream": 0.45,
+    "premium": 0.2
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Turkey",
+  "demand": 1.0,
+  "purchasing_power": 0.85,
+  "competition": 0.7,
+  "tax_rate": 0.106,
+  "growth_rate": 0.02,
+  "segments": {
+    "budget": 0.35,
+    "mainstream": 0.45,
+    "premium": 0.2
+  }
+}

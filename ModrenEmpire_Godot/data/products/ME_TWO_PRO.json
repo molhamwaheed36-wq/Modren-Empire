@@ -1,0 +1,25 @@
+{
+  "id": "ME_TWO_PRO",
+  "name": "Modren Two Pro",
+  "generation": 4,
+  "base_price": 719,
+  "target_segments": [
+    "mainstream",
+    "premium"
+  ],
+  "components": {
+    "cpu": 4,
+    "gpu": 4,
+    "npu": 3,
+    "display": 4,
+    "camera": 4,
+    "battery": 4,
+    "ram": 4,
+    "storage": 4,
+    "connectivity": 4,
+    "os": 4,
+    "materials": 4
+  },
+  "development_cost": 40000,
+  "manufacturing_multiplier": 1.0299999999999998
+}

@@ -1,0 +1,24 @@
+{
+  "id": "ME_ONE",
+  "name": "Modren One",
+  "generation": 1,
+  "base_price": 479,
+  "target_segments": [
+    "mainstream"
+  ],
+  "components": {
+    "cpu": 1,
+    "gpu": 1,
+    "npu": 1,
+    "display": 1,
+    "camera": 1,
+    "battery": 1,
+    "ram": 1,
+    "storage": 1,
+    "connectivity": 1,
+    "os": 1,
+    "materials": 1
+  },
+  "development_cost": 10000,
+  "manufacturing_multiplier": 1.1199999999999999
+}

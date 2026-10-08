@@ -1,0 +1,23 @@
+{
+  "name": "Modren Empire",
+  "developer": "MOLHAM WAHEED",
+  "email": "molhamwaheed36@gmail.com",
+  "engine": "Godot 4.x",
+  "target": "Android",
+  "content": {
+    "systems": 19,
+    "product_datasets": 10,
+    "technology_datasets": 29,
+    "market_datasets": 12,
+    "event_datasets": 30,
+    "company_datasets": 12,
+    "visual_assets": 42,
+    "audio_assets": 12
+  },
+  "principles": [
+    "no artificial file padding",
+    "systems/data/assets included in one project",
+    "external banking remains adapter boundary",
+    "LAN is local cooperation architecture"
+  ]
+}

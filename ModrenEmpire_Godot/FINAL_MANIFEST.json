@@ -1,0 +1,27 @@
+{
+  "project": "Modren Empire",
+  "owner": "MOLHAM WAHEED",
+  "ui": "Android-first premium dark management UI",
+  "file_count": 194,
+  "systems": [
+    "company",
+    "product_design",
+    "research",
+    "manufacturing",
+    "supply_chain",
+    "staff",
+    "markets",
+    "competitors",
+    "economy",
+    "marketing",
+    "events",
+    "patents",
+    "game_director",
+    "save_system",
+    "lan_coop",
+    "virtual_bank",
+    "currency_registry",
+    "android_export"
+  ],
+  "note": "Source project for Manus/Godot handoff; APK/device build must be performed in a Godot Android environment."
+}

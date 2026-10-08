@@ -1,0 +1,13 @@
+{
+  "name": "Japan",
+  "demand": 1.05,
+  "purchasing_power": 1.4,
+  "competition": 0.95,
+  "tax_rate": 0.126,
+  "growth_rate": 0.021,
+  "segments": {
+    "budget": 0.35,
+    "mainstream": 0.45,
+    "premium": 0.2
+  }
+}

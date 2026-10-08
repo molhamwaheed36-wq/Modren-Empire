@@ -1,0 +1,12 @@
+{
+  "id": "EVENT_007",
+  "title": "Dynamic Event 8",
+  "category": "technology",
+  "probability": 0.02,
+  "effects": {
+    "cash": 2750,
+    "reputation": 3,
+    "demand_multiplier": 1.0,
+    "duration_months": 4
+  }
+}

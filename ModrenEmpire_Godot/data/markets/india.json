@@ -1,0 +1,13 @@
+{
+  "name": "India",
+  "demand": 1.3,
+  "purchasing_power": 0.7,
+  "competition": 0.62,
+  "tax_rate": 0.1,
+  "growth_rate": 0.023,
+  "segments": {
+    "budget": 0.35,
+    "mainstream": 0.45,
+    "premium": 0.2
+  }
+}

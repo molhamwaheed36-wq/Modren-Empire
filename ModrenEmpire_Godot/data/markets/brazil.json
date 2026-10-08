@@ -1,0 +1,13 @@
+{
+  "name": "Brazil",
+  "demand": 1.1,
+  "purchasing_power": 0.75,
+  "competition": 0.6,
+  "tax_rate": 0.098,
+  "growth_rate": 0.021,
+  "segments": {
+    "budget": 0.35,
+    "mainstream": 0.45,
+    "premium": 0.2
+  }
+}

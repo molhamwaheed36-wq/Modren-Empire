@@ -1,0 +1,12 @@
+{
+  "id": "EVENT_021",
+  "title": "Dynamic Event 22",
+  "category": "market",
+  "probability": 0.02,
+  "effects": {
+    "cash": -6250,
+    "reputation": 2,
+    "demand_multiplier": 0.95,
+    "duration_months": 2
+  }
+}

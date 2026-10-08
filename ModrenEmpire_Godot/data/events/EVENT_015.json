@@ -1,0 +1,12 @@
+{
+  "id": "EVENT_015",
+  "title": "Dynamic Event 16",
+  "category": "market",
+  "probability": 0.028,
+  "effects": {
+    "cash": -4750,
+    "reputation": 1,
+    "demand_multiplier": 0.9,
+    "duration_months": 4
+  }
+}
