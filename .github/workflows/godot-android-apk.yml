@@ -27,6 +27,21 @@ jobs:
           SDKMANAGER=$(find "$ANDROID_HOME/cmdline-tools" -name sdkmanager -type f | head -1)
           yes | "$SDKMANAGER" --licenses >/dev/null || true
           yes | "$SDKMANAGER" "platform-tools" "platforms;android-34" "build-tools;34.0.0" "ndk;27.2.12479018"
+
+      - name: Install Godot and Android export templates
+        run: |
+          mkdir -p "$RUNNER_TEMP/godot" "$HOME/.local/share/godot/export_templates/4.3.stable"
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/godot/godot.zip" https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+          unzip -q "$RUNNER_TEMP/godot/godot.zip" -d "$RUNNER_TEMP/godot/bin"
+          GODOT=$(find "$RUNNER_TEMP/godot/bin" -type f -name 'Godot_v4.3-stable_linux.x86_64' | head -1)
+          chmod +x "$GODOT"
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/godot/templates.tpz" https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
+          unzip -p "$RUNNER_TEMP/godot/templates.tpz" templates/android_debug.apk > "$HOME/.local/share/godot/export_templates/4.3.stable/android_debug.apk"
+          unzip -p "$RUNNER_TEMP/godot/templates.tpz" templates/android_release.apk > "$HOME/.local/share/godot/export_templates/4.3.stable/android_release.apk"
+          echo "$GODOT" > "$RUNNER_TEMP/godot/godot_path.txt"
+
+      - name: Configure Godot Android SDK paths
+        run: |
           mkdir -p "$HOME/.config/godot"
           cat > "$HOME/.config/godot/editor_settings-4.tres" <<SETTINGS
           [gd_resource type="EditorSettings" format=3]
@@ -36,21 +51,26 @@ jobs:
           export/android/java_sdk_path = "$JAVA_HOME"
           SETTINGS
 
-      - name: Export Android APK
-        uses: firebelley/godot-export@v7.0.0
-        id: export
-        with:
-          godot_executable_download_url: https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
-          godot_export_templates_download_url: https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
-          relative_project_path: ModrenEmpire_Godot
-          presets_to_export: Android
-          export_debug: true
-          use_preset_export_path: true
-          cache: true
+      - name: Import project
+        run: |
+          GODOT=$(cat "$RUNNER_TEMP/godot/godot_path.txt")
+          "$GODOT" --headless --path ModrenEmpire_Godot --import
+
+      - name: Export debug APK
+        run: |
+          GODOT=$(cat "$RUNNER_TEMP/godot/godot_path.txt")
+          mkdir -p ModrenEmpire_Godot/build
+          "$GODOT" --headless --path ModrenEmpire_Godot --export-debug Android ModrenEmpire_Godot/build/ModrenEmpire-debug.apk
+
+      - name: Verify APK
+        run: |
+          test -s ModrenEmpire_Godot/build/ModrenEmpire-debug.apk
+          file ModrenEmpire_Godot/build/ModrenEmpire-debug.apk
+          sha256sum ModrenEmpire_Godot/build/ModrenEmpire-debug.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: modren-empire-godot-debug-apk
-          path: ModrenEmpire_Godot/build/*.apk
+          path: ModrenEmpire_Godot/build/ModrenEmpire-debug.apk
           if-no-files-found: error
