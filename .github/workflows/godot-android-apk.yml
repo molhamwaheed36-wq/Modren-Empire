@@ -63,7 +63,7 @@ jobs:
           APKSIGNER=$(find "$ANDROID_HOME/build-tools" -name apksigner | sort | tail -1)
           "$ZIPALIGN" -f 4 "$RUNNER_TEMP/unsigned.apk" "$GITHUB_WORKSPACE/ModrenEmpire_Godot/build/ModrenEmpire-debug-unaligned.apk"
           "$APKSIGNER" sign --ks "$RUNNER_TEMP/modren-debug.keystore" --ks-pass pass:android --key-pass pass:android --out "$GITHUB_WORKSPACE/ModrenEmpire_Godot/build/ModrenEmpire-debug.apk" "$GITHUB_WORKSPACE/ModrenEmpire_Godot/build/ModrenEmpire-debug-unaligned.apk"
-          "$APKSIGNER" verify --verbose ModrenEmpire_Godot/build/ModrenEmpire-debug.apk
+          "$APKSIGNER" verify --verbose "$GITHUB_WORKSPACE/ModrenEmpire_Godot/build/ModrenEmpire-debug.apk"
           file "$GITHUB_WORKSPACE/ModrenEmpire_Godot/build/ModrenEmpire-debug.apk"
           sha256sum "$GITHUB_WORKSPACE/ModrenEmpire_Godot/build/ModrenEmpire-debug.apk"
 
